@@ -2,7 +2,7 @@
 
 show case for how integrate apache ignite with spring boot plus using the durable memory feature and sql queries over ignite in memory caches
 
-how durable memory to disk is designed : 
+how it is integrated with spring boot :
 
-![alt text](durable-memory.png)
+![alt text](ignitedurablememory.jpg)
 
