@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: romehAlertManager
+  jackson:
+    default-property-inclusion: non_null
+
+mail:
+  service:
+    baseUrl: http://romeh-wsitt.bc/Mail/soap/mail
+    user: romehALERT
+    password: romehALERT
+    undeliverable: undeliverable@belgacom-ics.com
+  from:
+    bpo.mailbox: romeh.alerts@romeh.com
+  default:
+    receiver: mahmoud.romih@romeh.com
+
+alerts:
+  alertConfigurations:
+   -
+      serviceCode: "IOT_TEST"
+      errorCode: "1001_TEST"
+      emails:
+        - "mahmoud.romih@romeh.com.test"
+        - "mahmoud.romih@romeh.com.test"
+      maxCount: "3"
+      mailTemplate: "ticket.html"
+   -
+      serviceCode: "IOT_TEST"
+      errorCode: "1002_TEST"
+      emails:
+        - "mahmoud.romih@romeh.com.test"
+        - "mahmoud.romih@romeh.com.test"
+      maxCount: "2"
+      mailTemplate: "ticket.html"
+
+enableFilePersistence: false
+igniteConnectorPort: 11211
+igniteServerPortRange: 47500..47509
+ignitePersistenceFilePath: ./data
+initialDelay: 10000
+fixedDelay: 30000

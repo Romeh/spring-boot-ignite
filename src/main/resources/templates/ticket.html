@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ticket has been created</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+Dears,
+<br/>
+<br/>
+The support team inform you that your application with service Id: <span th:text="${alert.serviceId}"/> has created a ticket with a severity
+<span style="text-transform: capitalize; font-weight: bold;"
+      th:text="${alert.severity}"/>.
+<br/>
+<br/>
+Please find below all the details related to the ticket:
+<br/>
+<ul>
+    <li><b>Error code:</b> <span th:text="${alert.errorCode}"/></li>
+    <li><b>Ticket details:</b>
+        <ul>
+        <li th:each="error : ${alert.alertContent}">
+            <b><span th:text="${error.key}"/> :</b> <span th:text="${error.value}"/>
+            <br/>
+        </li>
+    </ul></li>
+
+</ul>
+<br/>
+We kindly ask you to take the necessary actions as you are part of the informing mail list of this ticket type.
+<br/>
+<br/>
+Kind regards,
+<br/>
+The Support team
+</body>
+</html>
