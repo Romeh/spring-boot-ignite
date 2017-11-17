@@ -1,8 +1,8 @@
 package com.romeh.ignitemanager.web;
 
+import com.google.gson.Gson;
 import com.romeh.ignitemanager.entities.AlertEntry;
 import com.romeh.ignitemanager.services.AlertsService;
-import com.google.gson.Gson;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;

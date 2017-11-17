@@ -6,7 +6,7 @@ spring:
 
 mail:
   service:
-    baseUrl: http://romeh-wsitt.bc/Mail/soap/mail
+    baseUrl: http://romeh-wsitt/Mail/soap/mail
     user: romehALERT
     password: romehALERT
     undeliverable: undeliverable@belgacom-ics.com
@@ -18,7 +18,7 @@ mail:
 alerts:
   alertConfigurations:
    -
-      serviceCode: "IOT_TEST"
+      serviceCode: "IG_TEST"
       errorCode: "1001_TEST"
       emails:
         - "mahmoud.romih@romeh.com.test"
@@ -26,7 +26,7 @@ alerts:
       maxCount: "3"
       mailTemplate: "ticket.html"
    -
-      serviceCode: "IOT_TEST"
+      serviceCode: "IG__TEST"
       errorCode: "1002_TEST"
       emails:
         - "mahmoud.romih@romeh.com.test"

@@ -6,15 +6,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-//import org.springframework.retry.annotation.CircuitBreaker;
-//import org.springframework.retry.annotation.Recover;
 import org.springframework.retry.annotation.CircuitBreaker;
 import org.springframework.retry.annotation.Recover;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
+
 import java.util.List;
 import java.util.Locale;
+
+//import org.springframework.retry.annotation.CircuitBreaker;
+//import org.springframework.retry.annotation.Recover;
 
 /**
  * Created by romeh on 17/08/2017.
