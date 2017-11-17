@@ -26,9 +26,9 @@ public class DataLoaderService {
 
     @PostConstruct
     public void init() {
-        final Cache<String, AlertConfigEntry> alertsConfig = ignite.getOrCreateCache(CacheNames.AlertsConfig.name());
+        final Cache<String, AlertConfigEntry> alertsConfigCache = ignite.getOrCreateCache(CacheNames.AlertsConfig.name());
         this.alertsConfig.getAlertConfigurations().forEach(alertConfigEntity -> {
-            alertsConfig.putIfAbsent(alertConfigEntity.getServiceCode() + "_" + alertConfigEntity.getErrorCode(),
+            alertsConfigCache.putIfAbsent(alertConfigEntity.getServiceCode() + "_" + alertConfigEntity.getErrorCode(),
                     alertConfigEntity);
 
         });
