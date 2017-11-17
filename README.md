@@ -2,7 +2,17 @@
 
 show case for how integrate apache ignite with spring boot plus using the durable memory feature and sql queries over ignite in memory caches
 
-how it is integrated with spring boot :
+* Integrate spring boot with Apache Ignite
+* How to enable and use persistent durable memory feature of Apache Ignite which can persist your cache data to the file disk to survive crash or restart so you can avoid data losing.
+* How to execute SQL queries over ignite caches
+* How to unit test and integration test ignite with spring boot
+* Simple Jenkins pipeline reference
+
+## how it is integrated with spring boot :
 
 ![alt text](ignitedurablememory.jpg)
 
+
+## for more detailed technical information please check my post :
+
+https://mromeh.com/2017/11/17/spring-boot-with-apache-ignite-persistent-durable-memory-storage-plus-sql-queries-over-ignite-cache/
