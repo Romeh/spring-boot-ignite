@@ -5,14 +5,17 @@ import com.romeh.ignitemanager.entities.CacheNames;
 import org.apache.ignite.Ignite;
 import org.apache.ignite.IgniteCache;
 import org.apache.ignite.cache.query.SqlFieldsQuery;
+import org.apache.ignite.cache.query.SqlQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import javax.cache.Cache;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by romeh on 22/08/2017.
@@ -32,15 +35,14 @@ public class CleanExpiredAlertsService {
         long towMinutesRange = System.currentTimeMillis()-900000;
         final IgniteCache<String, List<AlertEntry>> alertsCache = getAlertsCache();
         final String sql = "select * from AlertEntry where timestamp <= ?";
-        SqlFieldsQuery query = new SqlFieldsQuery(sql);
+        SqlQuery<String,AlertEntry> query = new SqlQuery(AlertEntry.class,sql);
         query.setArgs(towMinutesRange);
-        final List<List<?>> to_Delete_Alerts = alertsCache.query(query).getAll();
+        final List<Cache.Entry<String, AlertEntry>> to_Delete_Alerts = alertsCache.query(query).getAll();
         // then call remove all as this will remove the records from the cache and the persistent file system as sql delete will just delete it from the cache layer not the file system
         // or the persistent store
         if(to_Delete_Alerts!=null && !to_Delete_Alerts.isEmpty()){
-            List<AlertEntry> toDelete=(List<AlertEntry>) to_Delete_Alerts.get(0).get(0);
-            logger.debug("Finished cleaning out {} records",toDelete.size());
-            alertsCache.removeAll(new HashSet(toDelete));
+            logger.debug("Finished cleaning out {} records",to_Delete_Alerts.size());
+            alertsCache.removeAll(new HashSet(to_Delete_Alerts.stream().map(stringAlertEntryEntry -> stringAlertEntryEntry.getKey()).collect(Collectors.toList())));
 
         }
 

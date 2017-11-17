@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
+import javax.cache.Cache;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -112,18 +113,19 @@ public class IgniteAlertsStore implements AlertsStore {
     }
     // clean all alerts for that service code and service id
     private void cleanAllAlertEntriesForThatErrorCodeAndServiceCode(String serviceId, String errorId) {
-        // query the matching records first
+
+        // commenting it out for testing without clean-up
+     /*   // query the matching records first
         final String sql = "serviceId = ? and errorCode= ?";
-        SqlFieldsQuery query = new SqlFieldsQuery(sql);
+        SqlQuery<String,AlertEntry> query = new SqlQuery(AlertEntry.class,sql);
         query.setArgs(serviceId, errorId);
-        final List<List<?>> to_Delete_Alerts = getAlertsCache().query(query).getAll();
+        final List<Cache.Entry<String, AlertEntry>> to_Delete_Alerts = getAlertsCache().query(query).getAll();
         // then call remove all as this will remove the records from the cache and the persistent file system
         // as sql delete will just delete it from the cache layer not the file system
         // or the persistent store
         if(to_Delete_Alerts!=null && !to_Delete_Alerts.isEmpty()){
-            List<AlertEntry> alertEntryListToDelete=(List<AlertEntry>)to_Delete_Alerts.get(0).get(0);
-            getAlertsCache().removeAll(new HashSet(alertEntryListToDelete));
-        }
+            getAlertsCache().removeAll(new HashSet(to_Delete_Alerts.stream().map(stringAlertEntryEntry -> stringAlertEntryEntry.getKey()).collect(Collectors.toList())));
+        }*/
 
     }
 
