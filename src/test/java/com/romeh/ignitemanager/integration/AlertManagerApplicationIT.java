@@ -58,11 +58,11 @@ public class AlertManagerApplicationIT {
                 Arrays.asList(validationServiceJob1,validationServiceJob2,validationServiceJob3)
         );
         boolean status=true;
-        for(ServiceResponse serviceResponse: mapReduceResponse.getReducedResponses().values()){
+            for(ServiceResponse serviceResponse: mapReduceResponse.getReducedResponses().values()){
 
-            status=status && serviceResponse.isSuccess();
-        }
-
+                status=status && serviceResponse.isSuccess();
+            }
+        // make sure the aggregated status is failed
         assertEquals(status,false);
         assertEquals(mapReduceResponse.isSuccess(),false);
 
@@ -82,11 +82,11 @@ public class AlertManagerApplicationIT {
                 Arrays.asList(validationServiceJob1,validationServiceJob2,validationServiceJob3)
         );
         boolean status=true;
-       for(ServiceResponse serviceResponse: mapReduceResponse.getReducedResponses().values()){
+           for(ServiceResponse serviceResponse: mapReduceResponse.getReducedResponses().values()){
 
-           status=status && serviceResponse.isSuccess();
-       }
-
+               status=status && serviceResponse.isSuccess();
+           }
+        // make sure the aggregated status is success
         assertEquals(status,true);
         assertEquals(mapReduceResponse.isSuccess(),true);
 
