@@ -17,5 +17,8 @@ show case for how integrate apache ignite with spring boot plus using the durabl
 ![alt text](mapReduce.png)
 
 ## for more detailed technical information please check my post :
-
+Spring boot with Ignite durable memory and SQL queries :
 https://mromeh.com/2017/11/17/spring-boot-with-apache-ignite-persistent-durable-memory-storage-plus-sql-queries-over-ignite-cache/
+
+And for fail fast map reduce jobs in ignite compute grid:
+https://mromeh.com/2017/12/18/spring-boot-with-apache-ignite-fail-fast-distributed-map-reduce-closures/
