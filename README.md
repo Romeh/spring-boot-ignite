@@ -7,11 +7,14 @@ show case for how integrate apache ignite with spring boot plus using the durabl
 * How to execute SQL queries over ignite caches
 * How to unit test and integration test ignite with spring boot
 * Simple Jenkins pipeline reference
+* How to do fail fast map reduce parallel jobs execution in sync and async way 
 
-## how it is integrated with spring boot :
+## How it is integrated with spring boot :
 
 ![alt text](ignitedurablememory.jpg)
 
+## How to handle parallel fail fast map reduce jobs in sync and async way:
+![alt text](mapReduce.png)
 
 ## for more detailed technical information please check my post :
 
