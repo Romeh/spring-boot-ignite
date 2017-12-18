@@ -55,10 +55,5 @@ public class DataGridCompute {
         IgniteCompute igniteCompute = ignite.compute(ignite.cluster().forPredicate(clusterNode -> !clusterNode.isClient()));
         //execute the list of jobs in map reduce fashion and pass the custom reducer as well
         return igniteCompute.call(jobs, igniteReducer);
-
     }
-
-
-
-
 }
