@@ -19,7 +19,6 @@ import org.springframework.stereotype.Component;
 
 import javax.cache.Cache;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -42,7 +41,10 @@ public class IgniteAlertsStore implements AlertsStore {
         final String sql = "serviceId = ?";
         SqlQuery<String, AlertEntry> query = new SqlQuery<>(AlertEntry.class, sql);
         query.setArgs(serviceId);
-        return Optional.ofNullable(getAlertsCache().query(query).getAll().stream().map(stringAlertEntryEntry -> stringAlertEntryEntry.getValue()).collect(Collectors.toList()))
+        return Optional.ofNullable(getAlertsCache().query(query).getAll()
+                .stream()
+                .map(Cache.Entry::getValue)
+                .collect(Collectors.toList()))
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Alert for %s not found", serviceId)));
     }
 
@@ -66,7 +68,10 @@ public class IgniteAlertsStore implements AlertsStore {
     public List<AlertEntry> getAllAlerts() {
         final String sql = "select * from AlertEntry";
         SqlQuery<String, AlertEntry> query = new SqlQuery<>(AlertEntry.class, sql);
-        return getAlertsCache().query(query).getAll().stream().map(stringAlertEntryEntry -> stringAlertEntryEntry.getValue()).collect(Collectors.toList());
+        return getAlertsCache().query(query).getAll()
+                .stream()
+                .map(Cache.Entry::getValue)
+                .collect(Collectors.toList());
 
     }
 
@@ -97,7 +102,7 @@ public class IgniteAlertsStore implements AlertsStore {
             final Long result = (Long) count.get(0).get(0);
             if (result >= maxCount) {
                 logger.debug("max alerts count is reached for : {}, start sending mail alert {}", alertEntry.toString());
-                sendMail(alertEntry, configForServiceIdCodeIdCount.isPresent() ? configForServiceIdCodeIdCount.get().getEmails() : Collections.EMPTY_LIST, mailTemplate);
+                sendMail(alertEntry, configForServiceIdCodeIdCount.isPresent() ? configForServiceIdCodeIdCount.get().getEmails() : Collections.emptyList(), mailTemplate);
             }
         }
     }

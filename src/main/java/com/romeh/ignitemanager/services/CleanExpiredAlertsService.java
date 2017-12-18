@@ -4,7 +4,6 @@ import com.romeh.ignitemanager.entities.AlertEntry;
 import com.romeh.ignitemanager.entities.CacheNames;
 import org.apache.ignite.Ignite;
 import org.apache.ignite.IgniteCache;
-import org.apache.ignite.cache.query.SqlFieldsQuery;
 import org.apache.ignite.cache.query.SqlQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,12 +36,15 @@ public class CleanExpiredAlertsService {
         final String sql = "select * from AlertEntry where timestamp <= ?";
         SqlQuery<String,AlertEntry> query = new SqlQuery(AlertEntry.class,sql);
         query.setArgs(towMinutesRange);
-        final List<Cache.Entry<String, AlertEntry>> to_Delete_Alerts = alertsCache.query(query).getAll();
+        final List<Cache.Entry<String, AlertEntry>> toDeleteAlerts = alertsCache.query(query).getAll();
         // then call remove all as this will remove the records from the cache and the persistent file system as sql delete will just delete it from the cache layer not the file system
         // or the persistent store
-        if(to_Delete_Alerts!=null && !to_Delete_Alerts.isEmpty()){
-            logger.debug("Finished cleaning out {} records",to_Delete_Alerts.size());
-            alertsCache.removeAll(new HashSet(to_Delete_Alerts.stream().map(stringAlertEntryEntry -> stringAlertEntryEntry.getKey()).collect(Collectors.toList())));
+        if(toDeleteAlerts!=null && !toDeleteAlerts.isEmpty()){
+            logger.debug("Finished cleaning out {} records",toDeleteAlerts.size());
+            alertsCache.removeAll(new HashSet(toDeleteAlerts
+                    .stream()
+                    .map(Cache.Entry::getKey)
+                    .collect(Collectors.toList())));
 
         }
 
