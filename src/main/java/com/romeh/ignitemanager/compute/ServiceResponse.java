@@ -1,9 +1,13 @@
 package com.romeh.ignitemanager.compute;
 
 
-import lombok.*;
-
 import java.io.Serializable;
+
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @param <T> the service call response type

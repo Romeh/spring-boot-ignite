@@ -1,7 +1,8 @@
 package com.romeh.ignitemanager.services;
 
-import com.romeh.ignitemanager.entities.AlertEntry;
-import com.romeh.ignitemanager.exception.ResourceNotFoundException;
+import java.util.List;
+import java.util.Locale;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,8 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
-import java.util.List;
-import java.util.Locale;
+import com.romeh.ignitemanager.entities.AlertEntry;
+import com.romeh.ignitemanager.exception.ResourceNotFoundException;
 
 //import org.springframework.retry.annotation.CircuitBreaker;
 //import org.springframework.retry.annotation.Recover;

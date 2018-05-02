@@ -1,5 +1,8 @@
 package com.romeh.ignitemanager.compute;
 
+import java.util.Collection;
+import java.util.function.Consumer;
+
 import org.apache.ignite.Ignite;
 import org.apache.ignite.IgniteCompute;
 import org.apache.ignite.IgniteException;
@@ -8,9 +11,6 @@ import org.apache.ignite.lang.IgniteFuture;
 import org.apache.ignite.lang.IgniteReducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.Collection;
-import java.util.function.Consumer;
 
 /**
  * generic utility class for map reduce call

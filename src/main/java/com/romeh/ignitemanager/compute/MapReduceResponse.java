@@ -1,12 +1,12 @@
 package com.romeh.ignitemanager.compute;
 
+import java.io.Serializable;
+import java.util.Map;
+
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
-
-import java.io.Serializable;
-import java.util.Map;
 
 /**
  *  the generic reduce response that contain all single collected jobs responses

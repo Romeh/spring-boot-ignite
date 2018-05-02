@@ -1,9 +1,9 @@
 package com.romeh.ignitemanager.entities;
 
+import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
-import java.io.Serializable;
 
 /**
  * {@link CustomErrorResponse} will be returned in case of custom error occurrence

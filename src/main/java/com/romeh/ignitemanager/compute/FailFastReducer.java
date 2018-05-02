@@ -1,13 +1,12 @@
 package com.romeh.ignitemanager.compute;
 
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.ignite.lang.IgniteReducer;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * a fail fast map reducer to decide if it should keep waiting for other jobs to final reduce or it should terminate

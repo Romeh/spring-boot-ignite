@@ -1,9 +1,11 @@
 package com.romeh.ignitemanager.integration;
 
-import com.romeh.ignitemanager.AlertManagerApplication;
-import com.romeh.ignitemanager.compute.MapReduceResponse;
-import com.romeh.ignitemanager.compute.ServiceResponse;
-import com.romeh.ignitemanager.services.ComputeService;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.net.URL;
+import java.util.Arrays;
+
 import org.apache.ignite.lang.IgniteCallable;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,11 +17,10 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.net.URL;
-import java.util.Arrays;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import com.romeh.ignitemanager.AlertManagerApplication;
+import com.romeh.ignitemanager.compute.MapReduceResponse;
+import com.romeh.ignitemanager.compute.ServiceResponse;
+import com.romeh.ignitemanager.services.ComputeService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = AlertManagerApplication.class,webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)

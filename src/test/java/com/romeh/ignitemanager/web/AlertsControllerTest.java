@@ -1,8 +1,18 @@
 package com.romeh.ignitemanager.web;
 
-import com.google.gson.Gson;
-import com.romeh.ignitemanager.entities.AlertEntry;
-import com.romeh.ignitemanager.services.AlertsService;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -11,15 +21,9 @@ import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import com.google.gson.Gson;
+import com.romeh.ignitemanager.entities.AlertEntry;
+import com.romeh.ignitemanager.services.AlertsService;
 
 /**
  * Created by romeh on 11/08/2017.
@@ -69,9 +73,9 @@ public class AlertsControllerTest {
 
 
     @Test
-    public void deleteAlter() throws Exception {
+    public void deleteAlert() throws Exception {
         Mockito.doNothing().when(this.alertsService).deleteAlertEntry(Mockito.anyString());
-        this.mockMvc.perform(delete("/alerts/serviceId/codeId")).andExpect(status().isOk());
+        this.mockMvc.perform(delete("/alerts/serviceId")).andExpect(status().isOk());
     }
 
 
@@ -80,7 +84,7 @@ public class AlertsControllerTest {
         Mockito.when(this.alertsService.getAlertForServiceId(Mockito.anyString()))
                 .thenReturn(Arrays.asList(AlertEntry.builder().errorCode("errorCode").serviceId("serviceCode").severity("CRITICAL").build()));
         this.mockMvc.perform(get("/alerts/serviceId")).andExpect(status().isOk()).andExpect(content()
-                .string("[{\"errors\":null,\"errorCode\":\"errorCode\",\"serviceId\":\"serviceCode\",\"severity\":\"CRITICAL\"}]"));
+                .string("[{\"alertContent\":null,\"errorCode\":\"errorCode\",\"serviceId\":\"serviceCode\",\"severity\":\"CRITICAL\",\"timestamp\":null,\"alertId\":null}]"));
     }
 
 

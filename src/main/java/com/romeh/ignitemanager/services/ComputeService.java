@@ -1,16 +1,17 @@
 package com.romeh.ignitemanager.services;
 
-import com.romeh.ignitemanager.compute.DataGridCompute;
-import com.romeh.ignitemanager.compute.FailFastReducer;
-import com.romeh.ignitemanager.compute.MapReduceResponse;
-import com.romeh.ignitemanager.compute.ServiceResponse;
+import java.util.List;
+
 import org.apache.ignite.lang.IgniteCallable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.romeh.ignitemanager.compute.DataGridCompute;
+import com.romeh.ignitemanager.compute.FailFastReducer;
+import com.romeh.ignitemanager.compute.MapReduceResponse;
+import com.romeh.ignitemanager.compute.ServiceResponse;
 
 /**
  * sample service for how to call map reduce jobs in parallel asynchronous with fail fast reducer

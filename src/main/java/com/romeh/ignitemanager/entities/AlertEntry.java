@@ -1,12 +1,18 @@
 package com.romeh.ignitemanager.entities;
 
-import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
-import org.apache.ignite.cache.query.annotations.QuerySqlField;
-
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Map;
+
+import javax.validation.constraints.NotNull;
+
+import org.apache.ignite.cache.query.annotations.QuerySqlField;
+
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * Created by romeh on 19/07/2017.

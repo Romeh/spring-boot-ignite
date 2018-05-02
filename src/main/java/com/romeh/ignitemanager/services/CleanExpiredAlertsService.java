@@ -1,7 +1,11 @@
 package com.romeh.ignitemanager.services;
 
-import com.romeh.ignitemanager.entities.AlertEntry;
-import com.romeh.ignitemanager.entities.CacheNames;
+import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.cache.Cache;
+
 import org.apache.ignite.Ignite;
 import org.apache.ignite.IgniteCache;
 import org.apache.ignite.cache.query.SqlQuery;
@@ -11,10 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import javax.cache.Cache;
-import java.util.HashSet;
-import java.util.List;
-import java.util.stream.Collectors;
+import com.romeh.ignitemanager.entities.AlertEntry;
+import com.romeh.ignitemanager.entities.CacheNames;
 
 /**
  * Created by romeh on 22/08/2017.

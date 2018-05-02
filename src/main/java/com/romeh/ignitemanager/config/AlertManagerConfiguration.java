@@ -1,19 +1,24 @@
 package com.romeh.ignitemanager.config;
 
-import com.romeh.ignitemanager.entities.AlertConfigEntry;
-import com.romeh.ignitemanager.entities.AlertEntry;
+import java.util.Arrays;
+
 import org.apache.ignite.Ignite;
 import org.apache.ignite.IgniteException;
 import org.apache.ignite.Ignition;
 import org.apache.ignite.cache.CacheAtomicityMode;
-import org.apache.ignite.configuration.*;
+import org.apache.ignite.configuration.BinaryConfiguration;
+import org.apache.ignite.configuration.CacheConfiguration;
+import org.apache.ignite.configuration.ConnectorConfiguration;
+import org.apache.ignite.configuration.IgniteConfiguration;
+import org.apache.ignite.configuration.PersistentStoreConfiguration;
 import org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi;
 import org.apache.ignite.spi.discovery.tcp.ipfinder.vm.TcpDiscoveryVmIpFinder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Arrays;
+import com.romeh.ignitemanager.entities.AlertConfigEntry;
+import com.romeh.ignitemanager.entities.AlertEntry;
 
 /**
  * Created by romeh on 16/08/2017.

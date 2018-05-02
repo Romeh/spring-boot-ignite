@@ -1,8 +1,8 @@
 package com.romeh.ignitemanager.repositories;
 
-import com.romeh.ignitemanager.entities.AlertEntry;
-
 import java.util.List;
+
+import com.romeh.ignitemanager.entities.AlertEntry;
 
 /**
  * Created by romeh on 08/08/2017.

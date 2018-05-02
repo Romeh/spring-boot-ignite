@@ -1,14 +1,15 @@
 package com.romeh.ignitemanager.services;
 
-import com.romeh.ignitemanager.entities.AlertConfigEntry;
-import com.romeh.ignitemanager.entities.AlertsConfiguration;
-import com.romeh.ignitemanager.entities.CacheNames;
+import javax.annotation.PostConstruct;
+import javax.cache.Cache;
+
 import org.apache.ignite.Ignite;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-import javax.cache.Cache;
+import com.romeh.ignitemanager.entities.AlertConfigEntry;
+import com.romeh.ignitemanager.entities.AlertsConfiguration;
+import com.romeh.ignitemanager.entities.CacheNames;
 
 /**
  * Created by romeh on 11/08/2017.

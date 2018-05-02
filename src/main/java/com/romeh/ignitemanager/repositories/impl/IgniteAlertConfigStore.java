@@ -1,17 +1,19 @@
 package com.romeh.ignitemanager.repositories.impl;
 
-import com.romeh.ignitemanager.entities.AlertConfigEntry;
-import com.romeh.ignitemanager.entities.CacheNames;
-import com.romeh.ignitemanager.exception.ResourceNotFoundException;
-import com.romeh.ignitemanager.repositories.AlertsConfigStore;
+import java.util.Optional;
+
+import javax.cache.Cache;
+
 import org.apache.ignite.Ignite;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.cache.Cache;
-import java.util.Optional;
+import com.romeh.ignitemanager.entities.AlertConfigEntry;
+import com.romeh.ignitemanager.entities.CacheNames;
+import com.romeh.ignitemanager.exception.ResourceNotFoundException;
+import com.romeh.ignitemanager.repositories.AlertsConfigStore;
 
 /**
  * Created by romeh on 18/08/2017.

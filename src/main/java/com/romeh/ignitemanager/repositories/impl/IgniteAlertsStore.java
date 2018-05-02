@@ -1,12 +1,12 @@
 package com.romeh.ignitemanager.repositories.impl;
 
-import com.romeh.ignitemanager.entities.AlertConfigEntry;
-import com.romeh.ignitemanager.entities.AlertEntry;
-import com.romeh.ignitemanager.entities.CacheNames;
-import com.romeh.ignitemanager.exception.ResourceNotFoundException;
-import com.romeh.ignitemanager.repositories.AlertsConfigStore;
-import com.romeh.ignitemanager.repositories.AlertsStore;
-import com.romeh.ignitemanager.services.MailService;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import javax.cache.Cache;
+
 import org.apache.ignite.Ignite;
 import org.apache.ignite.IgniteCache;
 import org.apache.ignite.cache.query.SqlFieldsQuery;
@@ -17,11 +17,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
-import javax.cache.Cache;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import com.romeh.ignitemanager.entities.AlertConfigEntry;
+import com.romeh.ignitemanager.entities.AlertEntry;
+import com.romeh.ignitemanager.entities.CacheNames;
+import com.romeh.ignitemanager.exception.ResourceNotFoundException;
+import com.romeh.ignitemanager.repositories.AlertsConfigStore;
+import com.romeh.ignitemanager.repositories.AlertsStore;
+import com.romeh.ignitemanager.services.MailService;
 
 @Component
 public class IgniteAlertsStore implements AlertsStore {
