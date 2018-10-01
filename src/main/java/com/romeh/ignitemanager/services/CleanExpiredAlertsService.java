@@ -1,14 +1,9 @@
 package com.romeh.ignitemanager.services;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.cache.Cache;
 
 import org.apache.ignite.Ignite;
 import org.apache.ignite.IgniteCache;
-import org.apache.ignite.cache.query.SqlQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,15 +18,16 @@ import com.romeh.ignitemanager.entities.CacheNames;
  */
 @Service
 public class CleanExpiredAlertsService {
-    private static final Logger logger = LoggerFactory.getLogger(CleanExpiredAlertsService.class);
+	private static final Logger logger = LoggerFactory.getLogger(CleanExpiredAlertsService.class);
 
 
-    @Autowired
-    Ignite ignite;
+	@Autowired
+	Ignite ignite;
 
-    @Scheduled(initialDelayString = "${initialDelay}", fixedDelayString = "${fixedDelay}")
-    public void cleanExpiredRecords(){
-        // query the matching records first
+	@Scheduled(initialDelayString = "${initialDelay}", fixedDelayString = "${fixedDelay}")
+	// un comment if u need to test it otherwise it will clear ur alerts cache during startup
+	public void cleanExpiredRecords() {
+      /*  // query the matching records first
         logger.debug("Starting the clean up job to clear the expired records");
         long towMinutesRange = System.currentTimeMillis()-900000;
         final IgniteCache<String, List<AlertEntry>> alertsCache = getAlertsCache();
@@ -48,13 +44,13 @@ public class CleanExpiredAlertsService {
                     .map(Cache.Entry::getKey)
                     .collect(Collectors.toList())));
 
-        }
+        }*/
 
-    }
+	}
 
-    // get alerts cache store
-    protected IgniteCache<String, List<AlertEntry>> getAlertsCache() {
+	// get alerts cache store
+	protected IgniteCache<String, List<AlertEntry>> getAlertsCache() {
 
-        return ignite.cache(CacheNames.Alerts.name());
-    }
+		return ignite.cache(CacheNames.Alerts.name());
+	}
 }
