@@ -36,7 +36,7 @@ alerts:
 enableFilePersistence: true
 igniteConnectorPort: 11211
 igniteServerPortRange: 47500..47509
-ignitePersistenceFilePath: ./data
+ignitePersistenceFilePath: /Users/romeh/github/spring-boot-ignite/data
 initialDelay: 10000
 fixedDelay: 60000
 

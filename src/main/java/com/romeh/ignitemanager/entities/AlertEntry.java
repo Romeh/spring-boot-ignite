@@ -8,9 +8,11 @@ import javax.validation.constraints.NotNull;
 import org.apache.ignite.cache.query.annotations.QuerySqlField;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -22,6 +24,8 @@ import lombok.ToString;
 @Setter
 @ToString
 @EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 public class AlertEntry implements Serializable {
     @ApiModelProperty(notes = "the key value alert content for error description required to be entered by user into REST API ")
     private Map<String,String> alertContent;

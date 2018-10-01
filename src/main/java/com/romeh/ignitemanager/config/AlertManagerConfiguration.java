@@ -9,7 +9,10 @@ import org.apache.ignite.cache.CacheAtomicityMode;
 import org.apache.ignite.configuration.BinaryConfiguration;
 import org.apache.ignite.configuration.CacheConfiguration;
 import org.apache.ignite.configuration.ConnectorConfiguration;
+import org.apache.ignite.configuration.DataRegionConfiguration;
+import org.apache.ignite.configuration.DataStorageConfiguration;
 import org.apache.ignite.configuration.IgniteConfiguration;
+import org.apache.ignite.configuration.MemoryConfiguration;
 import org.apache.ignite.configuration.PersistentStoreConfiguration;
 import org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi;
 import org.apache.ignite.spi.discovery.tcp.ipfinder.vm.TcpDiscoveryVmIpFinder;
@@ -40,18 +43,27 @@ public class AlertManagerConfiguration {
     private String igniteServerPortRange;
     @Value("${ignitePersistenceFilePath}")
     private String ignitePersistenceFilePath;
+	private static final String DATA_CONFIG_NAME = "MyDataRegionConfiguration";
 
-    @Bean
+	@Bean
     IgniteConfiguration igniteConfiguration() {
         IgniteConfiguration igniteConfiguration = new IgniteConfiguration();
         igniteConfiguration.setClientMode(false);
         // durable file memory persistence
         if(enableFilePersistence){
-            PersistentStoreConfiguration persistentStoreConfiguration = new PersistentStoreConfiguration();
-            persistentStoreConfiguration.setPersistentStorePath("./data/store");
-            persistentStoreConfiguration.setWalArchivePath("./data/walArchive");
-            persistentStoreConfiguration.setWalStorePath("./data/walStore");
-            igniteConfiguration.setPersistentStoreConfiguration(persistentStoreConfiguration);
+
+	        DataStorageConfiguration dataStorageConfiguration = new DataStorageConfiguration();
+	        dataStorageConfiguration.setStoragePath(ignitePersistenceFilePath + "/store");
+	        dataStorageConfiguration.setWalArchivePath(ignitePersistenceFilePath + "/walArchive");
+	        dataStorageConfiguration.setWalPath(ignitePersistenceFilePath + "/walStore");
+	        DataRegionConfiguration dataRegionConfiguration = new DataRegionConfiguration();
+	        dataRegionConfiguration.setName(DATA_CONFIG_NAME);
+	        dataRegionConfiguration.setInitialSize(100 * 1000 * 1000);
+	        dataRegionConfiguration.setMaxSize(200 * 1000 * 1000);
+	        dataRegionConfiguration.setPersistenceEnabled(true);
+	        dataStorageConfiguration.setDataRegionConfigurations(dataRegionConfiguration);
+	        igniteConfiguration.setDataStorageConfiguration(dataStorageConfiguration);
+	        igniteConfiguration.setConsistentId("RomehFileSystem");
         }
         // connector configuration
         ConnectorConfiguration connectorConfiguration=new ConnectorConfiguration();
@@ -84,6 +96,7 @@ public class AlertManagerConfiguration {
         alerts.setBackups(0);
         alerts.setAtomicityMode(CacheAtomicityMode.ATOMIC);
         alerts.setName("Alerts");
+		alerts.setDataRegionName(DATA_CONFIG_NAME);
         alerts.setIndexedTypes(String.class,AlertEntry.class);
 
         CacheConfiguration alertsConfig=new CacheConfiguration();
@@ -93,15 +106,18 @@ public class AlertManagerConfiguration {
         alertsConfig.setAtomicityMode(CacheAtomicityMode.ATOMIC);
         alertsConfig.setName("AlertsConfig");
         alertsConfig.setIndexedTypes(String.class,AlertConfigEntry.class);
+		alertsConfig.setDataRegionName(DATA_CONFIG_NAME);
         igniteConfiguration.setCacheConfiguration(alerts,alertsConfig);
         return igniteConfiguration;
     }
 
     @Bean(destroyMethod = "close")
     Ignite ignite(IgniteConfiguration igniteConfiguration) throws IgniteException {
-        final Ignite start = Ignition.start(igniteConfiguration);
-        start.active(true);
-        return start;
+	    final Ignite ignite = Ignition.start(igniteConfiguration);
+	    // Activate the cluster. Automatic topology initialization occurs
+	    // only if you manually activate the cluster for the very first time.
+	    ignite.cluster().active(true);
+	    return ignite;
     }
 
 

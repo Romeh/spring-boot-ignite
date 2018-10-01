@@ -28,29 +28,29 @@ import com.romeh.ignitemanager.entities.CacheNames;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class IgniteAlertsSoreTest {
-    @Mock
-    private Ignite ignite;
-    @Mock
+	@Mock
+	private Ignite ignite;
+	@Mock
 	QueryCursor queryCursor;
-    @Mock
-    IgniteCache igniteCache;
-    @InjectMocks
-    private IgniteAlertsStore igniteAlertsStore;
+	@Mock
+	IgniteCache igniteCache;
+	@InjectMocks
+	private IgniteAlertsStore igniteAlertsStore;
 
-    @Before
-    public void setUp()  {
-	    Cache.Entry entry=new CacheEntryImpl("serviceId",AlertEntry.builder().errorCode("errorCode").build());
-	    when(ignite.cache(CacheNames.Alerts.name())).thenReturn(igniteCache);
-        when(igniteAlertsStore.getAlertsCache()).thenReturn(igniteCache);
-        when(igniteCache.query(any(SqlQuery.class))).thenReturn(queryCursor);
-        when(queryCursor.getAll()).thenReturn(Arrays.asList(entry));
+	@Before
+	public void setUp() {
+		Cache.Entry entry = new CacheEntryImpl("serviceId", AlertEntry.builder().errorCode("errorCode").build());
+		when(ignite.cache(CacheNames.Alerts.name())).thenReturn(igniteCache);
+		when(igniteAlertsStore.getAlertsCache()).thenReturn(igniteCache);
+		when(igniteCache.query(any(SqlQuery.class))).thenReturn(queryCursor);
+		when(queryCursor.getAll()).thenReturn(Arrays.asList(entry));
 
-    }
+	}
 
-    @Test
-    public void getAllAlerts()  {
-        assertEquals(igniteAlertsStore.getAlertForServiceId("serviceId").get(0).getErrorCode(),"errorCode");
-    }
+	@Test
+	public void getAllAlerts() {
+		assertEquals(igniteAlertsStore.getAlertForServiceId("serviceId").get(0).getErrorCode(), "errorCode");
+	}
 
 
 }
